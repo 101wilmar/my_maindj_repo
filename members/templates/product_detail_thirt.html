@@ -1,0 +1,240 @@
+{% load static %}
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+<link href="{% static "detail.css" %}" rel="stylesheet">
+
+<link href="{% static " light-theme.css" %}" rel="stylesheet" id="themeStylesheet">
+{% block title %}
+<div class='headercont'>  
+  <p class='back'><a href="/shop/"> &lt; BACK</a></p>
+
+  <a href='/members/'><img class='loggo' src='/static/img/logobv.png' ></a>
+  
+  {% if not cart %}
+  <a class="cartimg" href='/cart/cart/'>
+    <p id='cart-total'>0</p>
+  </a>
+
+  {% else %}
+  {% for item in cart %}
+  <a class="cartimg" href='/cart/cart/'>
+    <p id='cart-total'>{{ cart|length }}</p>
+  </a>
+  {% endfor %}
+  {% endif%}
+  </div>
+{% endblock %}
+
+{% block content %}
+<div class='headerbrand'>
+  <h1 class='brand'>{{ product.name }}</h1>
+  <h2 class='name'>  <a href="{{ product.get_absolute_url }}">{{ product.category }}</a></h2>
+</div>
+  <div class='class1'>
+    <div class='slider'>
+      <div id='slide-1' class="slide active">
+        <img  src="{{ product.picture }}"></img>
+        <div class="overlay"></div>
+      </div>
+      <div id='slide-2' class="slide">
+        <img  src="{{ product.picture1 }}"></img>
+        <div class="overlay"></div>
+      </div>
+      <div id='slide-3' class="slide">
+        <img src="{{ product.picture2 }}"></img>
+        <div class="overlay"></div>
+      </div>
+      <div class="prev-btn">&lt;</div>
+      <div class="next-btn">&gt;</div>
+      <a href="#slide-1" ><img  class='first1' src="{{ product.picture }}" width='50px' height='70px' ></a>
+      <a href="#slide-2"><img class='first2' src="{{ product.picture1 }}" width='50px' height='70px'></a>
+      <a href="#slide-3"><img class='first3' src="{{ product.picture2 }}" width='50px' height='70px'></a>
+    </div>
+
+<div class='class3'>
+
+  <h3 id='color'> цвет: {{ product.color }}</h3>
+
+  <p class="priceLL">${{ product.price }}</p>
+  <div  class='color' ><strong>ОПИСАНИЕ</strong><br>{{ product.descript }}</div>
+  <div class='info'><strong>ИНФОРМАЦИЯ</strong><br>{{ product.info }} </div>
+
+</div>
+<form class="add_cart" action="{% url 'cart:cart_add' product_type=product.product_type%}" method="post" >
+  {{ cart_product_form }}
+  {% csrf_token %}
+  <input type="submit" value="Добавить в корзину" id="addToCartButton">
+</form>
+
+
+</div>
+<h2 class='reccomend'>Рекомендуемые товары</h2>
+
+<ul class='rec-li'>
+{% for recommended_product in recommended_products %}
+    <li class='shop'>
+        <a href="{{ recommended_product.get_absolute_url }}">
+            <div class='detail'>
+              <img src="{{ recommended_product.picture }}">
+            </div>
+            <h2>{{ recommended_product.name }}</h2> 
+            {{ recommended_product.price }}
+        </a>
+    </li>
+{% endfor %}
+</ul>
+<footer>{% include 'footer.html' %}</footer>
+
+</div>
+<div class="modal fade" id="cartModal" tabindex="-1" role="dialog" aria-labelledby="cartModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="cartModalLabel">Cart</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Product added to cart
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+<script>
+$(document).ready(function() {
+  // При клике на ссылку слайдера
+  $(".slider a").click(function(e) {
+    e.preventDefault(); // Отменить стандартное поведение ссылки
+
+    var target = $(this).attr("href"); // Получить значение атрибута href
+    $(".slide").removeClass("active"); // Удалить класс "active" у всех слайдов
+    $(target).addClass("active"); // Добавить класс "active" к выбранному слайду
+  });
+
+  // При клике на кнопку "Предыдущий слайд"
+  $(".prev-btn").click(function() {
+    var currentSlide = $(".slide.active");
+    var prevSlide = currentSlide.prev();
+
+    if (prevSlide.length === 0) {
+      prevSlide = $(".slide").last();
+    }
+
+    currentSlide.removeClass("active");
+    prevSlide.addClass("active");
+  });
+
+
+  // При клике на кнопку "Следующий слайд"
+  $(".next-btn").click(function() {
+    var currentSlide = $(".slide.active");
+    var nextSlide = currentSlide.next();
+
+    if (nextSlide.length === 0) {
+      nextSlide = $(".slide").first();
+    }
+
+    currentSlide.removeClass("active");
+    nextSlide.addClass("active");
+  });
+});
+
+$(document).ready(function() {
+  $('#addToCartButton').click(function() {
+    $('#cartModal').modal('show');
+  });
+});
+
+
+$(document).ready(function() {
+  $('.add_cart').submit(function(event) {
+    event.preventDefault(); // Предотвращаем отправку формы
+    var form = $(this);
+    var url = form.attr('action');
+    var data = form.serialize();
+
+    $.ajax({
+      url: url,
+      type: 'POST',
+      data: data,
+      dataType: 'json',
+      success: function(response) {
+
+        function updateQuantity(quantityInput) {
+          /* Calculate line price */
+          var productRow = $(quantityInput).parent().parent();
+          var price = parseFloat(productRow.children('.product-price').text());
+          var quantity = $(quantityInput).val();
+          var linePrice = price * quantity;
+
+          productRow.children('.product-line-price').each(function() {
+            $(this).fadeOut(fadeTime, function() {
+              $(this).text(linePrice.toFixed(2));
+              recalculateCart();
+              $(this).fadeIn(fadeTime);
+            });
+          });
+        }
+
+        function removeItem(removeButton) {
+          var productRow = $(removeButton).parent().parent();
+          productRow.slideUp(fadeTime, function() {
+            productRow.remove();
+            recalculateCart();
+          });
+        }
+      },
+      error: function(xhr, status, error) {
+        // При возникновении ошибки в AJAX запросе выводим сообщение об ошибке
+        alert('An error occurred while adding the product to the cart.');
+      }
+    });
+  });
+});
+
+var themeStylesheet = document.getElementById('themeStylesheet');
+var toggleThemeButton = document.getElementById('toggleThemeButton');
+var body = document.body;
+
+// Проверяем, сохранена ли выбранная тема в localStorage
+if (localStorage.getItem('selectedTheme')) {
+  var selectedTheme = localStorage.getItem('selectedTheme');
+  
+  // Применяем сохраненную тему
+  themeStylesheet.href = selectedTheme;
+  body.classList.add(selectedTheme.replace('.css', ''));
+} else {
+  // Используем тему по умолчанию
+  themeStylesheet.href = 'detail.css';
+}
+
+// Обработчик события для кнопки изменения темы
+toggleThemeButton.addEventListener('click', function() {
+  if (body.classList.contains('light-mode')) {
+    // Если текущая тема светлая, меняем на темную
+    themeStylesheet.href = 'dark-theme.css';
+    body.classList.replace('light-mode', 'dark-mode');
+    localStorage.setItem('selectedTheme', 'dark-theme.css');
+  } else {
+    // Если текущая тема темная, меняем на светлую
+    themeStylesheet.href = 'light-theme.css';
+    body.classList.replace('dark-mode', 'light-mode');
+    localStorage.setItem('selectedTheme', 'light-theme.css');
+  }
+});
+var cartTotalElement = document.getElementById('cart-total');
+
+
+</script>
+
+{% endblock %}

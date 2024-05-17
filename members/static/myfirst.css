@@ -1,0 +1,13 @@
+body {
+  background-color: rgb(173, 157, 157);
+  font-family: 'Times New Roman', Times, serif;
+  
+}
+
+h1 { 
+  text-align: center;
+  border: rgb(107, 106, 119) 10px solid;
+  width: 500px;
+  border-radius: 10%;
+}
+ 

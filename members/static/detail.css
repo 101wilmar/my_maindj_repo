@@ -1,0 +1,351 @@
+@font-face {
+  font-family: 'Cormorant';
+  font-weight: 300;
+  font-style: normal;
+  src: url("./fonts/Montserrat-Light.ttf");
+}
+
+.class2 img{
+  width: 350px;
+  border-radius: 10%;
+  position: relative;
+  border: 1px navy solid;
+  height: 520px;
+
+
+}
+
+.headercont {
+
+  width: 92%;
+  margin-left: 4%;
+}
+
+.back {
+  margin-right: auto;
+  width: 10%; /* Элемент "BACK" будет находиться слева */
+}
+
+.loggo {
+  align-items: center;
+  width: 220px;
+  height: 84px;
+  margin-top: 2%;
+  position: relative;
+  margin-left: 43%;
+}
+
+.cartimg {
+  background-image: url('img/icons8-cart-30\ \(1\).png');
+  color: rgb(0, 0, 0);
+  position: relative;
+  width: 30px;
+  margin-left: 25%;
+  margin-top: 0.6%;
+  height: 30px;
+  display: inline-block;
+}
+
+.class3 img{
+  width: 50px;
+  border-radius: 10%;
+  left: 100px;
+  position: static;
+
+}
+
+.class1 {
+  border-bottom: 0.1px rgb(204, 204, 204) solid;
+}
+
+.class3 {
+  max-height: 10px;
+  position: static;
+}
+
+.class3 h3 {
+  
+ position: sticky;
+}
+
+.class3 .active {
+  left: 100px;
+  position: relative;
+  bottom: -12.5vh;
+}
+
+.class1 {
+  display: flex;
+  margin-left: 50px;
+  margin-top: -5%;
+  height: 77%;
+}
+
+
+.class1 .slider {
+  margin: 50px;
+}
+
+.headerbrand {
+  position: relative;
+  margin-top: 1%;
+  
+
+}
+
+.brand {
+  text-align: center;
+  margin-left: 60%;
+  margin-top: 1%;
+}
+
+.name {
+  text-align: center;
+  margin-left:60%;
+}
+
+
+.hide {
+  display: none;
+}
+
+body {
+  background-color: rgb(255, 255, 255);
+  font-family: 'Cormorant';
+  margin-left: 10%;
+  margin-right: 10%;
+  transition: background-color 0.3s;
+  max-width: 100%;
+  flex-shrink: 0;
+}
+
+body.light-mode {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+body.dark-mode {
+  background-color: #000000;
+  color: #ffffff;
+}
+
+select {
+  background-color:#ededed;
+  border-radius: 0%;
+  border: 0.1px rgb(204, 204, 204) solid;
+  position: relative;
+  width: 50%;
+  height: 50px;
+  text-align: center;
+  margin-right: 12.5%;
+  top: 32%;
+  border-radius:4px;
+}
+
+#darkModeButton {
+  background-color: #fff;
+  transition: 0.5s;
+  margin-bottom: 30px;
+}
+
+#darkModeButton:hover {
+  background-color: #000000;
+  color: #fff;
+}
+
+.slider {
+  position: relative;
+  width: 410px; /* Задайте желаемую ширину слайдера */
+  height: 550px; /* Задайте желаемую высоту слайдера */
+  top: -70px;
+  margin-left: 30%;
+}
+
+.slide {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 1s;
+
+}
+
+.slide.active {
+  opacity: 1;
+}
+
+.slide img {
+  
+  width: 410px;
+  border-radius: 10%;
+  position: relative;
+  height: auto;
+
+}
+
+.slide .overlay {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+
+  opacity: 0;
+  transition: opacity 0.5s; 
+  border-radius: 10%;
+}
+
+.slider .slide:hover .overlay {
+  opacity: 1; 
+}
+
+.prev-btn, .next-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 24px;
+  color: white;
+  cursor: pointer;
+}
+
+.prev-btn {
+  left: 1px;
+  color: black;
+}
+
+.next-btn {
+  right: 1px;
+  color: black;
+}
+
+img.first1,
+img.first2,
+img.first3 {
+  width: 13%; /* Ширина изображений */
+  height: 15%; /* Высота изображений */
+  margin-right: 10px; /* Отступ между изображениями (можете изменить по своему усмотрению) */
+}
+
+/* Стили для контейнера изображений */
+.image-container {
+  display: flex; /* Расположение в строку */
+  align-items: center; /* Выравнивание по вертикали */
+}
+
+.slider a {
+  margin: 10px;
+  position: relative;
+  width: 50px;
+  height: 70px;
+}
+
+
+
+.first1 {
+  margin-top: 138%;
+  margin-left: 20%;
+}
+
+.first2 {
+  margin-top: 138%;
+}
+
+.first3 {
+  margin-top: 138%;
+} 
+
+.slider a img:hover{
+  border: 1px black solid ;
+} 
+
+.prev-btn:hover, .next-btn:hover { 
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 40%;
+}
+
+.color {
+  width: 260px;
+  font-family: 'Cormorant';
+
+  font-size: large;
+  margin-left: -0%;
+  font-size: 13.2px;
+  word-spacing: 1.5px;
+  line-height: 1.7;
+  border-radius: 15%;
+  margin-top: 123%;
+}
+
+.priceLL {
+  position: absolute;
+  font-size: 22px;
+  margin-top: 6.5%;
+  margin-left: 5%;
+}
+
+#color {
+  position: absolute;
+  font-size: 22px;
+  margin-top: 8.8%;
+  margin-left: 3%;
+}
+
+.info {   
+  width: 260px;
+  font-family: 'Cormorant';
+
+  font-size: large;
+  margin-left: 110%;
+  font-size: 13.2px;
+  word-spacing: 1.5px;
+  line-height: 1.7;
+  border-radius: 15%;
+  margin-top: -100%;
+}
+
+
+.dack {
+  text-decoration: none;
+
+}
+
+a {
+  text-decoration: none;
+  color: #000000;
+}
+
+.back:hover {
+  border-bottom: 1px rgb(204, 204, 204) solid;
+  text-decoration: none;
+}
+
+label {
+  display: none;
+}
+
+.add_cart input{
+  background-color: #ededed;
+  text-decoration: none;
+  color: #000000;
+  padding: 10px 20px;
+  border: none;
+  font-family: 'Cormorant';
+  border: 0.1px rgb(204, 204, 204) solid;
+  position: relative;
+  margin-left: -0%;
+  top: 20%;
+  height: 50px;
+  width: 100%;
+  cursor: pointer;
+  align-items: center;
+  text-align: center;
+  transition: 0.3s linear;
+  border-radius:4px;
+}
+
+.add_cart input:hover {
+  background-color: rgb(0, 0, 0);
+  color: #ffffff;
+}
+
+
+

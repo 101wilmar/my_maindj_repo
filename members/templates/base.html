@@ -1,0 +1,76 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>{% block title %}Мой магазин{% endblock %}</title>
+<link href="{% static "shop.css" %}" rel="stylesheet">
+</head>
+<body>
+<div class='headercont'>  
+    <p ><a class='back' href="/shop/"> &lt; BACK</a></p>
+    <div class='loggo'></div>
+  
+    <a href='/members/'><img class='loggo' src='/static/img/logobv.png' ></a>
+  
+
+</div>
+
+
+<div id="subheader">
+  <div class='cart'>
+    {% with total_items=cart|length %}
+    {% if cart|length > 0 %}
+    <a href={% url 'cart:cart_detail' %}>
+      {{ total_items }} шт ,${{ cart.get_total_price }}
+    </a>
+    {% else %}
+    Корзина пустая 
+    {% endif %}
+    {% endwith %} 
+  </div>
+</div>
+<div id="content">
+{% block content %}{% endblock %}
+</div>
+</body>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(document).ready(function() {
+  // При клике на ссылку слайдера
+  $(".slider a").click(function(e) {
+    e.preventDefault(); // Отменить стандартное поведение ссылки
+
+    var target = $(this).attr("href"); // Получить значение атрибута href
+    $(".slide").removeClass("active"); // Удалить класс "active" у всех слайдов
+    $(target).addClass("active"); // Добавить класс "active" к выбранному слайду
+  });
+
+  // При клике на кнопку "Предыдущий слайд"
+  $(".prev-btn").click(function() {
+    var currentSlide = $(".slide.active");
+    var prevSlide = currentSlide.prev();
+
+    if (prevSlide.length === 0) {
+      prevSlide = $(".slide").last();
+    }
+
+    currentSlide.removeClass("active");
+    prevSlide.addClass("active");
+  });
+
+  // При клике на кнопку "Следующий слайд"
+  $(".next-btn").click(function() {
+    var currentSlide = $(".slide.active");
+    var nextSlide = currentSlide.next();
+
+    if (nextSlide.length === 0) {
+      nextSlide = $(".slide").first();
+    }
+
+    currentSlide.removeClass("active");
+    nextSlide.addClass("active");
+  });
+});
+</script>
+</html>

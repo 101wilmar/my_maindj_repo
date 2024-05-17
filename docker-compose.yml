@@ -1,0 +1,58 @@
+version: '3.9'
+
+volumes:
+  postgres-data:
+  client-dist:
+
+services:
+  postgres_db:
+    #сбор сервиса из образа PostgreSql
+    image: postgres:13
+
+   #данные для подключения к БД в контейнер 
+    environment:
+      - POSTGRES_USER=paladin
+      - POSTGRES_DB=paladin_db
+      - POSTGRES_PASSWORD=1234
+    volumes:
+    #собираем данные postgres вне контейнера
+      - postgres-data:/var/lib/postgresql/data:delegated
+    ports:
+      - "5432:5432"
+    #задает имя контейнера, которое будет использоваться внутри среды Docker
+    container_name: postgres_db
+    networks:
+      - maindj-network
+
+  redis:
+    image: redis:7.2.4
+    ports:
+      - "6379:6379"
+    container_name: redis
+    networks:
+      - maindj-network
+
+  maindj:
+    build: .
+    ports:
+      - "8000:8000"
+    depends_on:
+      - postgres_db
+    #command: ["python3", "manage.py", "runserver_plus", "--cert-file", "cert.crt", "0.0.0.0:8000"]
+    environment:
+      POSTGRES_HOST: postgres_db
+      POSTGRES_DB: paladin_db
+      POSTGRES_USER: paladin
+      POSTGRES_PASSWORD: 1234 
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+    volumes:
+     - client-dist:/maindj
+    networks:
+      - maindj-network
+
+
+
+networks:
+  maindj-network:
+    driver: bridge

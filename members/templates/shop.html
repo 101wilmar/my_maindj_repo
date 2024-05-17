@@ -1,0 +1,206 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="{% static 'shop.css' %}">
+</head>
+<body>
+  <div class='mainbody'>
+  {% block content %} 
+  <div class='headercont'>
+    <a class='ahref' href="/members/">members</a>
+    <a href='/members/'><img class='loggo' src='/static/img/logobv.png' ></a>
+    {% if not cart %}
+  <a class="cartimg" href='/cart/cart/'>
+    <p id='cart-total'>0</p>
+  </a>
+
+  {% else %}
+  {% for item in cart %}
+  <a class="cartimg" href='/cart/cart/'>
+    <p id='cart-total'>{{ cart|length }}</p>
+  </a>
+  {% endfor %}
+  {% endif%}
+  {% if user.is_authenticated %}
+
+  <div class='topnav'>
+    <ul>
+      <li>
+        <a href="{% url 'users:profile' %}">{{ user.username }}</a>
+      </li>
+      <li class="separator">|</li>
+      <li>
+        <form action="{% url 'users:logout' %}" method="post">
+          {% csrf_token %}
+          <button type="submit">Выйти</button>
+        </form>
+      </li>
+    </ul>
+  </div>
+
+  {% else %}
+    <li class='login-account'><a href={% url 'users:login'%}>Войти в аккаунт</a> |
+    <a href={% url 'users:register' %}>Регистрация</a></li>
+  {% endif %}
+    <h1 class='logo'></h1>
+    
+  </div>
+
+  <div class='cscs'>
+    {% if selected_brands %}
+    <p class='selected_brands'>Выбранно:
+        {% for brand in selected_brands %}
+            {{ brand }}{% if not forloop.last %}, {% endif %}
+        {% endfor %}
+    </p>
+{% endif %}
+
+<div class='listbrannnns' onclick="toggleBrandSection()">
+  <h2 class='brandss'>Бренды</h2>
+</div>
+
+<div id="brandSection" class="hidden"> 
+  <form method="GET" action="{% url 'members:shop' %}">
+    <ul class='list_brands'>
+      {% if categories %}
+        {% for category in categories %}
+          <div> 
+            <li>
+              <label>
+                <input type="checkbox" name="category" value="{{ category }}"
+                  {% if category in selected_brands %} checked {% endif %}>
+                {{ category }}
+              </label>
+            </li>
+          </div>  
+        {% endfor %}
+      {% else %}
+        <p>No categories found.</p>
+      {% endif %}
+    </ul>
+    <button type="submit">Поиск</button>
+  </form>
+</div>
+
+<div class='listbrannnn' onclick="toggleBrandSectio()">
+  <h2 class='brandss'>Цвета</h2>
+</div>
+
+
+<div id="brandSectio" class="hidde"> 
+  <form method="GET" action="{% url 'members:shop' %}">
+    <ul class='list_brands'>
+      {% for color in colors %}
+        <div> 
+          <li>
+            <label>
+              <input type="checkbox" name="color" value="{{ color }}"
+                     {% if color in selected_colors %} checked {% endif %}>
+              {{ color }}
+            </label>
+          </li>
+        </div>
+      {% endfor %}
+    </ul>
+    <button type="submit">Поиск</button>
+  </form>
+</div>
+<!-- Hidden brand section -->
+<div class='form-direction'>
+  <form method="GET" action="{% url 'members:shop' %}">
+    <input type="hidden" name="order" value="{{ ordering }}">
+    {% for brand in selected_brands %}
+      <input type="hidden" name="category" value="{{ brand }}">
+    {% endfor %}
+    {% for color in selected_colors %}
+      <input type="hidden" name="color" value="{{ color }}">
+    {% endfor %}
+    <button class='button-direction' type="submit" name="direction" value="ascending">по возрастанию</button><hr class="unstyled">
+    <button class='button-direction' type="submit" name="direction" value="descending">по убыванию</button>
+  </form>
+</div>
+
+</div>
+
+  <div class="container">
+   
+
+
+    {% for product in products %}
+    
+    <li class='shop'>
+      
+      <a href="{{ product.get_absolute_url }}">
+        <div class='detail'>
+          <img src="{{ product.picture }}">
+        </div>  
+          <h3 class='product-price'>{{ product.price }} $</h3>
+        
+ 
+        <h2>{{ product.name}}</h2>
+
+      </a>   
+
+    </li>
+    {% endfor %}
+
+  
+    
+</div>  
+
+{% block navigation %}
+{% if page_obj.has_other_pages %}
+  <nav class='list-pages'>
+    <ul>
+      {% if page_obj.has_previous %}
+        <li class='page-num'>
+          <a href="?page={{ page_obj.previous_page_number }}">&lt;</a>
+        </li>
+      {% endif %}
+      {% for p in paginator.page_range %}
+      {% if page_obj.number == p %}
+        <li class='page-num page-num-selected'>{{ p }}</li>
+      {% elif p >= page_obj.number|add:-2 and p <= page_obj.number|add:2 %}
+        <li class='page-num'> 
+          <a href="?page={{ p }}">{{ p }}</a>
+        </li>
+      {% endif %}
+      {% endfor %}
+
+      {% if page_obj.has_next %}
+      <li class='page-num'>
+        <a href="?page={{ page_obj.next_page_number }}">&gt;</a>
+      </li>
+    {% endif %}
+    </ul>
+  </nav>
+{% endif %}
+{% endblock %}
+<footer>{% include 'footer.html' %}</footer>
+{%endblock%}
+</div>
+</body>
+
+<script>
+var darkModeButton = document.getElementById('darkModeButton');
+var body = document.body;
+
+darkModeButton.addEventListener('click', function() {
+  body.classList.toggle('dark-mode');
+});
+
+function toggleBrandSection() {
+  var brandSection = document.getElementById('brandSection');
+  brandSection.classList.toggle('hidden');
+}
+
+function toggleBrandSectio() {
+  var brandSection = document.getElementById('brandSectio');
+  brandSection.classList.toggle('hidde');
+}
+
+
+</script>
+</html>

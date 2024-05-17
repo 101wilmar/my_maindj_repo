@@ -1,0 +1,26 @@
+{% extends "master.html" %}
+
+{% block title %}
+  My Tennis Club - List of all members
+{% endblock %}
+
+
+{% block content %}
+{% if not is_draft.True %}
+
+<h1 class='logotip'></h1>
+  <div class="mycard">
+
+    <ul>
+
+
+      <li  onclick="window.location = '/shop/'"> Sweatshirts </li>
+      <a href="{% url 'members:shop_tshirt' %}"><li > T-shirts </li></a>
+      <a href="{% url 'members:shop_shorts' %}"><li> Shorts </li></a>
+      <a href="{% url 'members:shop_sneakers' %}"><li> Sneakers </li></a>
+
+    </ul>
+  </div>
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,83 @@
+[
+{
+  "model": "members.category",
+  "pk": 1,
+  "fields": {
+    "brand": "Polo Ralph Lauren",
+    "name": "Худи",
+    "slug": "hudi"
+  }
+},
+{
+  "model": "members.category",
+  "pk": 2,
+  "fields": {
+    "brand": "C.P COMPANY",
+    "name": "Худи Polo Ralph Lauren",
+    "slug": "hudi-polo-ralph-lauren"
+  }
+},
+{
+  "model": "members.product",
+  "pk": 1,
+  "fields": {
+    "category": 1,
+    "product_type": "9f3eac49-630b-4e",
+    "name": "Хлопковое худи",
+    "slug": "hlopkovoe-hudi",
+    "color": "черный",
+    "price": "212.00",
+    "picture": "https://st2.tsum.com/sig/baa227c66ebd9e7ece6f10fd1b08fe4a/width/1526/i/44/14/53/df/441453df-ee88-3106-ba1a-0f070e5c087e.jpg",
+    "picture1": "https://st2.tsum.com/sig/81c660003e166b067086401d18f96747/width/1526/i/dc/96/f1/30/dc96f130-ce93-3f08-9c5b-4e23adde25a1.jpg",
+    "picture2": "https://st1.tsum.com/sig/768e12e44b4d131ce7cd81548bb4b81d/width/1526/i/12/2c/de/00/122cde00-0923-3b73-be61-e5cdbeaa9875.jpg",
+    "picture3": "https://st1.tsum.com/sig/e991a001e9c0c3f21f3ab0e43118e19f/width/1526/i/83/2f/68/55/832f6855-7cef-31f9-9ed3-5e81e61c7e36.jpg",
+    "descript": "ass",
+    "info": "ass",
+    "available": true,
+    "created": "2024-05-07T09:57:47.050Z",
+    "uploaded": "2024-05-07T09:57:47.050Z"
+  }
+},
+{
+  "model": "members.product",
+  "pk": 2,
+  "fields": {
+    "category": 1,
+    "product_type": "9f3eac49-630b-4e22",
+    "name": "Хлопковое худи",
+    "slug": "hlopkovoe-hudi-rr",
+    "color": "черный",
+    "price": "212.00",
+    "picture": "https://st2.tsum.com/sig/baa227c66ebd9e7ece6f10fd1b08fe4a/width/1526/i/44/14/53/df/441453df-ee88-3106-ba1a-0f070e5c087e.jpg",
+    "picture1": "https://st2.tsum.com/sig/81c660003e166b067086401d18f96747/width/1526/i/dc/96/f1/30/dc96f130-ce93-3f08-9c5b-4e23adde25a1.jpg",
+    "picture2": "https://st1.tsum.com/sig/768e12e44b4d131ce7cd81548bb4b81d/width/1526/i/12/2c/de/00/122cde00-0923-3b73-be61-e5cdbeaa9875.jpg",
+    "picture3": "https://st1.tsum.com/sig/e991a001e9c0c3f21f3ab0e43118e19f/width/1526/i/83/2f/68/55/832f6855-7cef-31f9-9ed3-5e81e61c7e36.jpg",
+    "descript": "ass",
+    "info": "ass",
+    "available": true,
+    "created": "2024-05-07T09:58:33.676Z",
+    "uploaded": "2024-05-07T09:58:33.676Z"
+  }
+},
+{
+  "model": "members.product",
+  "pk": 3,
+  "fields": {
+    "category": 2,
+    "product_type": "d6caaf2e-72fb-47ae-9",
+    "name": "Iphone 15 Pro",
+    "slug": "iphone-15-pro",
+    "color": "черный",
+    "price": "777.00",
+    "picture": "https://st2.tsum.com/sig/baa227c66ebd9e7ece6f10fd1b08fe4a/width/1526/i/44/14/53/df/441453df-ee88-3106-ba1a-0f070e5c087e.jpg",
+    "picture1": "https://st1.tsum.com/sig/197377bb360f7ee58a978e6a3593f843/width/1526/i/8c/3a/90/10/8c3a9010-ae7f-3f85-87a5-e27ad2ab4334.jpg",
+    "picture2": "https://st2.tsum.com/sig/570d08179b93e909d5a088dc6aab78d7/width/1526/i/86/59/91/78/86599178-6ed4-3ce3-b567-59515a08bde9.jpg",
+    "picture3": "https://st1.tsum.com/sig/e991a001e9c0c3f21f3ab0e43118e19f/width/1526/i/83/2f/68/55/832f6855-7cef-31f9-9ed3-5e81e61c7e36.jpg",
+    "descript": "djasdjsa",
+    "info": "sadadsads",
+    "available": true,
+    "created": "2024-05-10T14:33:36.125Z",
+    "uploaded": "2024-05-10T14:33:36.125Z"
+  }
+}
+]

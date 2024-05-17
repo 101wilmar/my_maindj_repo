@@ -1,0 +1,77 @@
+
+{% load static %}
+<link href="{% static "cart.css" %}" rel="stylesheet">
+<div class='headercont'>  
+  <p ><a class='back' href="/shop/"> &lt; BACK</a></p>
+  <div class='loggo'></div>
+
+  <a href='/members/'><img class='loggo' src='/static/img/logobv.png' ></a>
+
+
+  </div>
+<div class='all'>
+
+
+{% block content %}
+  <h1>Корзина покупок</h1>
+  <div class="cart">
+    <div class='enddd'>
+      <div class="total">
+        <td>общая стоимость:</td>
+        <td colspan="4"></td>
+        <td class="num">${{ cart.get_total_price }}</td>
+      </div>
+    
+  
+  <p class="text-right">
+    <a href="{% url 'members:shop' %}" class="button light">В магазин</a>
+    <a href="{% url 'members:pay' %}" class="button">Оформить заказ</a>
+  </p>
+</div>
+
+    <tbody>
+      {% for item in cart %}
+        {% with product=item.product %}
+        
+          <div class='mainbody'>
+            <td>
+              <a href="{{ product.get_absolute_url }}">
+                <img class='mainimg' src="{% if product.picture1 %}{{ product.picture1 }}{% else %} {% endif %}" width='150px' heigh='100px'>
+              </a>
+            </td>
+            <div class='all_named'> 
+              <div class=''>{{ product.category }}</div>
+              <div class=''>{{ product.name }}</div>
+              <div class=''>{{ product.color }}</div>
+            </div>
+    
+            
+            
+            <td><a href="{% url 'cart:cart_remove' product_type=product.product_type %}">&#9587;</a></td>
+            
+            <div>
+              {{ item.quantity }}
+            </div>
+            
+            <td class="num">${{ item.total_price }}</td>
+          </div>
+          <form action="{% url 'cart:cart_add' product_type=product.product_type %}" method="post">
+            {{ item.update_quantity_form.quantity }}
+            {{ item.update_quantity_form.update }}
+            <input type="submit" value="Обновить">
+            {% csrf_token %}
+          </form>
+        {% endwith %}
+        
+      {% endfor %}
+      <a href="{% url 'cart:clear_cart' %}">Очистить корзину</a>
+
+      <footer>{% include 'footer.html' %}</footer>
+</tbody>
+</div>
+</div>
+
+  <footer>
+    <div class='footer'>©wilmar.prodd<div>
+  </footer>
+{% endblock %}

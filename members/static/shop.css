@@ -1,0 +1,353 @@
+@font-face {
+  font-family: 'Cormorant';
+  font-weight: 300;
+  font-style: normal;
+  src: url("./fonts/Montserrat-Light.ttf");
+}
+
+.mainbody {
+  max-width: 100%;
+  flex-shrink: 0;
+}
+
+.loggo {
+  align-items: center;
+  width: 220px;
+  height: 84px;
+  margin-top: 2%;
+  position: relative;
+  margin-left: 43%;
+}
+
+.topnav {
+  list-style-type: none; /* Убираем маркеры у списка */
+  width: auto;
+}
+
+.topnav li {
+  display: inline-block; /* Располагаем элементы в ряд */
+  margin-right: 10px; /* Отступ между элементами */
+}
+
+.topnav li:last-child {
+  margin-right: 0; /* Убираем отступ для последнего элемента */
+}
+
+.topnav li a {
+  text-decoration: none; /* Убираем подчеркивание ссылок */
+  color: #333; /* Цвет текста ссылок */
+}
+
+.topnav li a:hover {
+  text-decoration: underline; /* Подчеркиваем ссылку при наведении */
+}
+
+.topnav .separator {
+  margin: 0 5px; /* Отступ для разделительной черты */
+}
+
+
+
+.headercont {
+  border: 0px black solid ;
+  width: 92%;
+  margin-left: 4%;
+  border-bottom:  0.1px rgb(204, 204, 204) solid;
+}
+
+.imga {
+  background-image: url('img/icons8-cart-30\ \(1\).png');
+  color: rgb(0, 0, 0);
+  position: fixed;
+  width: 30px;
+  margin-left: 25%;
+  margin-top: 0%;
+  height: 30px;
+  display: inline-block;
+}
+
+#cart-total {
+  position: relative;
+  display: block;
+  text-align: center;
+  color: #fff;
+  background-color: #e70202;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  font-size: 14px;
+}
+
+.form-direction {
+  justify-content: right; /* Выравнивание содержимого по правому краю */
+  display: flex; /* Использование flex-контейнера */
+  position: static; /* По умолчанию */
+  cursor: pointer; /* Стандартный курсор при наведении */
+  flex-grow: 1; /* Занимает доступное пространство по оси растяжения */
+  flex-shrink: 0; /* Не сжимается при нехватке места */
+  max-width: 100%; /* Занимает максимально доступную ширину */
+  height: 100%; /* Занимает всю доступную высоту */
+  margin-bottom: 20px; /* Примерный отступ снизу, равный высоте .shop */
+}
+
+.unstyled {
+  border: none;
+  margin: 0;
+  padding: 0;
+  /* Другие свойства, которые вы хотите сбросить */
+}
+
+.button-direction {
+  width: 80%;
+  font-size: 100%; 
+}
+
+.rec-li {
+  display: flex;
+  flex-wrap: wrap;
+  height: auto;
+  max-width: 100%;
+  width: 100%;  
+  overflow: hidden;
+  align-items: center;
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  height: auto;
+  text-decoration: none;
+  align-items: right;
+  margin-left: 15%;
+  max-width: 100%;
+  width: 100%;  
+  overflow: hidden;
+}
+
+.hidden {
+  display: none;
+ 
+}
+
+.hidde {
+  display: none;
+  transition: 1s;
+}
+
+.listbrannnns {
+  justify-content: left;
+  display: flex;
+  position: relative;
+  cursor: pointer;
+}
+
+.listbrannnn {
+  justify-content: left;
+  display: flex;
+  position: static;
+  cursor: pointer;
+}
+
+
+.detail img {
+  width: 210px;
+  border-radius: 15%;
+  max-height: 320px;
+  transition: 1s ;
+}
+
+img { 
+  width: 210px;
+  border-radius: 15%;
+}
+
+.shop {
+  width: 20%;
+  text-align: center;
+  border: 5px rgb(255, 255, 255) solid;
+  border-radius: 15%;
+  background-color: rgb(255, 255, 255);
+  font-family: 'Cormorant';
+  justify-content: right;
+
+}
+
+
+
+.shop h3 {
+  font-size: 170%;
+}
+
+.shop h2 {
+  font-size: 170%;
+}
+
+
+a {
+  text-decoration: none; /* Убираем подчёркивание */
+  font-family: 'Cormorant';
+
+ }
+
+a:hover {
+  text-decoration: none; /* Убираем подчёркивание */
+  color: #3b3b3b;
+}
+
+body {
+  background-color: rgb(255, 255, 255);
+  transition: background-color 0.3s;
+  margin-left: 10%;
+  margin-right: 10%;
+  font-family: 'Cormorant';
+}
+
+.dark-mode {
+  background-color: #000000;
+  color: #ffffff;
+}
+
+#darkModeButton {
+  background-color: #fff;
+  margin-top: 2%;
+  height: 50px;
+  width: 210px;
+  cursor: pointer;
+  align-items: center;
+  text-align: center;
+  transition: 0.5s linear;
+  border-radius:4px;
+  border: 0.1px rgb(204, 204, 204) solid;
+  margin-bottom: 20px;
+  height: 30px;
+  background-color: #ededed;
+  text-decoration: none;
+  color: #000000;
+  padding: 10px 20px;
+  border: none;
+  font-family: 'Cormorant';
+}
+
+#darkModeButton:hover {
+  background-color: #000000;
+  color: #fff;
+  font-family: 'Cormorant';
+}
+
+.detail:hover {
+  transition: 3s linear;
+  background: url('img/gogo.png') no-repeat center;
+
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  max-height: 320px;
+  scale: 1.2;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+.ahref{
+  color: rgb(0, 0, 0);
+  margin-top: 0%;
+  margin-left: 4%;
+  position: fixed;
+}
+
+li {
+  list-style: none;
+
+}
+
+input {
+  border: 0.1px rgb(204, 204, 204) solid;
+}
+
+input:hover {
+  color: #ffffff;
+  background-color: #000000;
+}
+
+
+.cartimg {
+  background-image: url('img/icons8-cart-30\ \(1\).png');
+  color: rgb(0, 0, 0);
+  position: fixed;
+  width: 30px;
+  margin-left: 25%;
+  margin-top: 0.6%;
+  height: 30px;
+  display: inline-block;
+}
+
+button {
+  background-color: #ffffff;
+  text-decoration: none;
+  color: #000000;
+  padding: 10px 20px;
+  border: none;
+  transition: 0.3s linear;
+  font-family: 'Cormorant';
+  border: 0.1px rgb(204, 204, 204) solid;
+  cursor: pointer;
+  margin-top: 10%;
+}
+
+button:hover {
+  color: #ffffff;
+  background-color: #000000;
+}
+
+footer {
+  height: 5%;
+  position: relative;
+  border-top:  0.1px rgb(204, 204, 204) solid;
+}
+
+.footer{
+  margin-left: 30%;
+  margin-right: 30%;
+  margin-top: 5%;
+  text-align: center;
+  position: relative;
+  font-size: 90%;
+  
+}
+
+
+
+.footer_p {
+  font-size: 70%;
+}
+.detail img:hover {
+  opacity: 0;
+}
+
+.list_brands {
+  align-items: left;
+  position: static;
+  margin-bottom: 10%;
+  font-size: 130%;
+  display: inline;
+}
+
+.cscs {
+  justify-content: left; /* Выравнивание содержимого по левому краю */
+   /* Относительное позиционирование */
+  cursor: pointer; /* Стандартный курсор при наведении */
+   /* Устанавливаем z-index, чтобы элемент был выше других элементов */
+  font-size: small; /* Размер шрифта */
+   /* Фиксированная ширина */
+  align-items: left;
+  display: inline-block;
+  width: 8%;
+  margin-right: 60%;
+  margin-left: 5%;
+  font-size: small;
+  position: fixed;
+ 
+   /* Максимальная ширина в процентах от ширины родительского контейнера */
+}

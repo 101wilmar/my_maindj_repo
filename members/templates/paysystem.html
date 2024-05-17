@@ -1,0 +1,129 @@
+{% extends 'master.html' %}
+{% load static %}
+<head>
+  <link rel="stylesheet" href="{% static 'main.css' %}">
+  <title>{% block title %}{% endblock %}</title>
+</head>
+{% block content %}
+<h1 class='pay-title'>Оплата</h1>
+<form method="post" class="form-container">
+  {% csrf_token %}
+  <label class="form-label" for="id_cart_number">Номер карты:</label>
+  {{ form.cart_number.errors }}
+  {{ form.cart_number }}
+
+
+  <label class="form-label" for="id_day">День:</label>
+  {{ form.day.errors }}
+  {{ form.day }}
+
+  <label class="form-label" for="id_month" maxlength="2">Месяц:</label>
+  {{ form.data_number.errors  }}
+  {{ form.month}}
+
+  <label class="form-label" for="id_year" maxlength="2">Год:</label>
+  {{ form.year_number.errors }}
+  {{ form.year }}
+
+  <label class="form-label" for="id_cvv_number">CVV:</label>
+  {{ form.cvv_number.errors }}
+  {{ form.cvv_number }}
+
+  <label class="form-label" for="id_amount">Сумма:</label>
+  {{ form.amount.errors }}
+  {{ form.amount }}
+
+  <label class="form-label" for="id_description">Описание:</label>
+  {{ form.description.errors }}
+  {{ form.description }}
+  <button type="submit" class="submit-button">Отправить</button>
+</form>
+
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var form = document.querySelector('.form-container');
+    form.addEventListener('submit', function(event) {
+      var cartNumberInput = document.getElementById('id_cart_number');
+      var dayField = document.getElementById("id_day");
+      var monthField = document.getElementById("id_month");
+      var yearField = document.getElementById("id_year");  
+      var cvvNumberInput = document.getElementById('id_cvv_number');
+      var amountInput = document.getElementById('id_amount');
+  
+      // Очищаем предыдущие сообщения об ошибках
+      clearErrors();
+  
+      // Проверка номера карты
+      if (cartNumberInput.value.length !== 16) {
+        showErrorMessage(cartNumberInput, 'Неверный номер карты');
+        event.preventDefault();
+        return;
+      }
+
+      // Проверка дня
+      var day = parseInt(dayField.value);
+      if (isNaN(day) || day < 1 || day > 31) {
+        showErrorMessage(dayField, 'Неверный день');
+        event.preventDefault();
+        return;
+      }
+
+      // Проверка месяца
+      var month = parseInt(monthField.value);
+      if (isNaN(month) || month < 1 || month > 12) {
+        showErrorMessage(monthField, 'Неверный месяц');
+        event.preventDefault();
+        return;
+      }
+
+      // Проверка года
+      var year = parseInt(yearField.value);
+      if (isNaN(year) || year < new Date().getFullYear()) {
+        showErrorMessage(yearField, 'Неверный год');
+        event.preventDefault();
+        return;
+      }
+
+      // Проверка CVV
+      if (cvvNumberInput.value.length !== 3) {
+        showErrorMessage(cvvNumberInput, 'Неверное количество символов CVV');
+        event.preventDefault();
+        return;
+      }
+  
+      // Проверка суммы
+      var amount = parseFloat(amountInput.value);
+      if (isNaN(amount) || amount <= 0) {
+        showErrorMessage(amountInput, 'Сумма должна быть положительной числовой');
+        event.preventDefault();
+        return;
+      }
+    });
+
+  
+    // Функция для отображения сообщения об ошибке
+    function showErrorMessage(input, message) {
+      var errorElement = document.createElement('div');
+      errorElement.classList.add('error-message');
+      errorElement.textContent = message;
+      input.parentNode.insertBefore(errorElement, input.nextSibling);
+      input.classList.add('invalid');
+    }
+  
+    // Функция для очистки сообщений об ошибках
+    function clearErrors() {
+      var errorMessages = document.querySelectorAll('.error-message');
+      errorMessages.forEach(function(errorMessage) {
+        errorMessage.remove();
+      });
+      var invalidInputs = document.querySelectorAll('.invalid');
+      invalidInputs.forEach(function(input) {
+        input.classList.remove('invalid');
+      });
+    }
+  });
+</script>
+
+{% endblock %}

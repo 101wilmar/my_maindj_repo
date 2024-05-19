@@ -137,8 +137,9 @@ select {
   width: 50%;
   height: 50px;
   text-align: center;
-  margin-right: 12.5%;
-  top: 32%;
+  margin-left: 120%;
+  margin-top: 85%;
+  margin-bottom: -92.5%;
   border-radius:4px;
 }
 

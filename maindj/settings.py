@@ -113,8 +113,7 @@ DATABASES = {
 CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.redis.RedisCache',
-        'LOCATION': 'redis://redis:6379/1',
-
+        'LOCATION': 'redis://127.0.0.1:6379/1',
     }
 }
 
@@ -162,8 +161,8 @@ USE_TZ = True
 STATIC_URL = 'static/'
 
 
-LOGIN_REDIRECT_URL = '/members'
-LOGOUT_REDIRECT_URL = '/members'
+LOGIN_REDIRECT_URL = '/main'
+LOGOUT_REDIRECT_URL = '/main'
 LOGIN_URL = 'users:login'
 
 

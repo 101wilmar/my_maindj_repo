@@ -351,3 +351,42 @@ footer {
  
    /* Максимальная ширина в процентах от ширины родительского контейнера */
 }
+
+.list-pages {
+  justify-content: center;
+  align-items: center;
+  left: 50%;
+  position: relative;
+  cursor: pointer;  
+}
+
+
+
+.list-pages ul {
+  display: inline-block; /* Центрирование списка */
+  padding: 0; /* Убираем отступы */
+  margin: 0; /* Убираем отступы */
+}
+
+.list-pages ul li {
+  display: inline-block; /* Располагаем элементы списка в одну линию */
+  margin: 0 5px; /* Задаем отступ между элементами */
+}
+
+.list-pages ul li a {
+  text-decoration: none; /* Убираем подчеркивание у ссылок */
+  color: #000; /* Цвет текста */
+}
+
+.page-num-selected {
+  font-weight: bold; /* Выделение текущей страницы */
+}
+
+.container-log {
+
+  font-size: 200%;
+}
+
+.container-pls {
+  font-size: 200%;
+}

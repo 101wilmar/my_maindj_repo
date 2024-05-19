@@ -1,4 +1,5 @@
 
+from django.forms import ValidationError
 from django.views import View
 from django.views.generic import ListView
 from django.shortcuts import render, get_object_or_404, redirect
@@ -20,11 +21,16 @@ def members(request):
   return HttpResponse(template.render())
 
 
+def not_auth(request):
+  return render(request, 'not_aunt.html')
+
 def product_detail(request, id, slug, model, template_name):
     product = get_object_or_404(model, id=id, slug=slug, available=True)
     cart_product_form = CartAddProductForm()
-    cart_product_form = CartAddProductForm()
+
     user = request.user
+    if not user.is_authenticated:
+      return redirect('members:not_auth')
     
     # Передаем информацию о текущем продукте в функцию рекомендаций
     recommended_products = recommend_products(user, product)
@@ -60,8 +66,8 @@ class ShopListView(ListView):
     def get_queryset(self):
         selected_brands = self.request.GET.getlist('category')
         selected_color = self.request.GET.getlist('color')
-        max_price = self.request.GET.get('price_max')
-        min_price = self.request.GET.get('price_min')
+        max_price = self.request.GET.get('price')
+        min_price = self.request.GET.get('-price')
         direction = self.request.GET.get('direction')
 
 
@@ -129,8 +135,8 @@ class TShirtShopView(ListView):
     def get_queryset(self):
         selected_brands = self.request.GET.getlist('category')
         selected_color = self.request.GET.getlist('color')
-        max_price = self.request.GET.getlist('price')
-        min_price = self.request.GET.getlist('-price')
+        max_price = self.request.GET.get('price')
+        min_price = self.request.GET.get('-price')
 
         cache_key = f"tshirt_product:{urlencode(self.request.GET)}"
         queryset = cache.get(cache_key)
@@ -194,32 +200,37 @@ class ShortsShopView(ListView):
     def get_queryset(self):
         selected_brands = self.request.GET.getlist('category')
         selected_color = self.request.GET.getlist('color')
-        max_price = self.request.GET.getlist('price')
-        min_price = self.request.GET.getlist('-price')
+        max_price = self.request.GET.get('price')
+        min_price = self.request.GET.get('-price')
+        direction = self.request.GET.get('direction')
 
         cache_key = f"shorts_product:{urlencode(self.request.GET)}"
         queryset = cache.get(cache_key)
 
         if queryset is None:  # Используем `is None`, чтобы убедиться, что queryset не закэширован
             queryset = ProductShorts.objects.filter(available=True)
-
+            # Фильтрация по брендам
             if selected_brands:
-              queryset = queryset.filter(category__name__in=selected_brands)
+                queryset = queryset.filter(category__name__in=selected_brands)
 
+            # Фильтрация по цвету
             if selected_color:
-              queryset = queryset.filter(color__in=selected_color)
-              
-            if min_price and max_price:
-              queryset = queryset.filter(price__gte=min_price, price__lte=max_price)
+                queryset = queryset.filter(color__in=selected_color)
 
-            direction = self.request.GET.get('direction')
+            # Фильтрация по цене
+            if min_price is not None:
+                queryset = queryset.filter(price__gte=min_price)
+            if max_price is not None:
+                queryset = queryset.filter(price__lte=max_price)
+
+            # Сортировка по цене
             if direction == 'ascending':
-              queryset = queryset.order_by('price')
-            if direction == 'descending':
-              queryset = queryset.order_by('-price')
+                queryset = queryset.order_by('price')
+            elif direction == 'descending':
+                queryset = queryset.order_by('-price')
             # Кэшируем результат на 15 минут
             cache.set(cache_key, queryset, 60 * 15)
-        
+
         return queryset
 
     def get_context_data(self, **kwargs):
@@ -258,34 +269,38 @@ class SheakersShopView(ListView):
     def get_queryset(self):
         selected_brands = self.request.GET.getlist('category')
         selected_color = self.request.GET.getlist('color')
-        max_price = self.request.GET.getlist('price')
-        min_price = self.request.GET.getlist('-price')
-        
+        max_price = self.request.GET.get('price')
+        min_price = self.request.GET.get('-price')
+        direction = self.request.GET.get('direction')       
 
-        cache_key = f"sneakers_product:{urlencode(self.request.GET)}"
+        cache_key = f"shoes_product:{urlencode(self.request.GET)}"
         queryset = cache.get(cache_key)
 
         if queryset is None:  # Используем `is None`, чтобы убедиться, что queryset не закэширован
             queryset = ProductSneakers.objects.filter(available=True)
-
+            # Фильтрация по брендам
             if selected_brands:
                 queryset = queryset.filter(category__name__in=selected_brands)
 
+            # Фильтрация по цвету
             if selected_color:
                 queryset = queryset.filter(color__in=selected_color)
-              
-            if min_price and max_price:
-                queryset = queryset.filter(price__gte=min_price, price__lte=max_price)
 
-            direction = self.request.GET.get('direction')
+            # Фильтрация по цене
+            if min_price is not None:
+                queryset = queryset.filter(price__gte=min_price)
+            if max_price is not None:
+                queryset = queryset.filter(price__lte=max_price)
+            
+
+            # Сортировка по цене
             if direction == 'ascending':
                 queryset = queryset.order_by('price')
-            if direction == 'descending':
+            elif direction == 'descending':
                 queryset = queryset.order_by('-price')
-            
             # Кэшируем результат на 15 минут
             cache.set(cache_key, queryset, 60 * 15)
-           
+
         return queryset
     
     def get_context_data(self, **kwargs):

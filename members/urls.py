@@ -7,9 +7,10 @@ from django.views.decorators.cache import cache_page
 app_name = 'members'
 
 urlpatterns = [
-      path('members/' , cache_page(60)(views.members), name='members'), 
+      path('main/' , cache_page(60)(views.members), name='members'), 
      
       path('pay/', views.pay_system_view, name='pay'),
+      path('not-auth/', views.not_auth, name='not_auth'),
 
       path('shop/', cache_page(10)(ShopListView.as_view()) , name='shop'),
       path('shop/<int:id>/<slug:slug>', views.product_detail_product,

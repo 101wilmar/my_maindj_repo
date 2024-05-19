@@ -6,16 +6,26 @@
   <title>{% block title %}{% endblock %}</title>
 </head>
 <body>
-
-<div class="topnav">
   {% if user.is_authenticated %}
-    <ul class='login-account'> {{ user.username }} | <a href={% url 'users:logout'%}>Выйти из аккаунта</a></ul>
-  {% else %}
-    <ul class='login-account'><a href={% url 'users:login'%}>Войти в аккаунт</a> |
-    <a href={% url 'users:register' %}>Регистрация</a></ul>
-  {% endif %}
-</div>
+  <div class='topnav'>
+    <ul>
+      
+        <a href="{% url 'users:profile' %}">{{ user.username }}</a>
+      
+      <div class="separator">|</div>
+      
+        <form action="{% url 'users:logout' %}" method="post">
+          {% csrf_token %}
+          <button type="submit">Выйти</button>
+        </form>
+      
+    </ul>
+  </div>
 
+  {% else %}
+    <div class='login-account'><a href={% url 'users:login'%}>Войти в аккаунт</a> |
+    <a href={% url 'users:register' %}>Регистрация</a></div>
+  {% endif %}
 {% block content %}
 {% endblock %}
 

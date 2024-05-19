@@ -8,7 +8,7 @@
 <div class='headercont'>  
   <p class='back'><a href="/shop/"> &lt; BACK</a></p>
 
-  <a href='/members/'><img class='loggo' src='/static/img/logobv.png' ></a>
+  <a href='/main/'><img class='loggo' src='/static/img/logobv.png' ></a>
   
   {% if not cart %}
   <a class="cartimg" href='/cart/cart/'>
@@ -61,7 +61,12 @@
 
 </div>
 <form class="add_cart" action="{% url 'cart:cart_add' product_type=product.product_type%}" method="post" >
+
+    
   {{ cart_product_form }}
+
+  
+  
   {% csrf_token %}
   <input type="submit" value="Добавить в корзину" id="addToCartButton">
 </form>

@@ -32,7 +32,7 @@ SECRET_KEY = '$-0)*lt7o$$csdet(s+(9*h-4b*)72=i#m)8f$ai0!!ng%%+#6'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'maindj.ru']
+ALLOWED_HOSTS = ['5.35.82.97', 'localhost', 'maindj.ru']
 INTERNAL_IPS = ["127.0.0.1"]
 
 # Application definition
@@ -113,7 +113,7 @@ DATABASES = {
 CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.redis.RedisCache',
-        'LOCATION': 'redis://127.0.0.1:6379/1',
+        'LOCATION': 'redis://redis:6379/1',
     }
 }
 

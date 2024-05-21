@@ -13,7 +13,8 @@ RUN apt-get update -y && \
     apt-get install -y \
     openssl
 RUN pip install django-extensions
-
+# Установка необходимых системных пакетов
+RUN apt-get update && apt-get install -y redis-tools
 # Копируем файл db.json
 COPY db.json /app
 # Устанавливаем зависимости Python из requirements.txt
